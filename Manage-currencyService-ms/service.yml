@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: manage-currencyservice-ms
+  labels:
+    app: manage-currencyservice-ms
+    version: v1
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: manage-currencyservice-ms
+    version: v1
+  type: NodePort

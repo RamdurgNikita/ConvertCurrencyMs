@@ -1,0 +1,32 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manage-currencyservice-ms
+  labels:
+    app: manage-currencyservice-ms
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      app: manage-currencyservice-ms
+      version: v1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: manage-currencyservice-ms
+        version: v1
+    spec:
+      containers:
+      - image: 81052/currency-docker:currency-manage
+        imagePullPolicy: IfNotPresent
+        name: manage-currency
+        env:
+       
+        - name: SPRING.ZIPKIN.BASEURL
+          value: http://zipkin:9411/
+        ports:
+        - containerPort: 8081

@@ -1,0 +1,51 @@
+logging:
+  level:
+    root: INFO
+
+
+spring: 
+  datasource:
+    url: jdbc:h2:mem:Currency_db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /console
+  
+
+ 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+server:
+  port: 0
+  
+spring:
+  zipkin:
+    base-url: http://127.0.0.1:9411/
+    sender:
+      type: web
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1
+    enabled: true
+    
+    
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.int}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761
